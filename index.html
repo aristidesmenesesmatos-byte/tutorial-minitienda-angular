@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tutorial MiniTienda Angular + Bootstrap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap para maquetar el propio tutorial -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      scroll-behavior: smooth;
+    }
+
+    header.hero {
+      padding: 4rem 0 3rem;
+      background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    header.hero h1 {
+      font-weight: 700;
+    }
+
+    main {
+      padding-bottom: 4rem;
+    }
+
+    section {
+      padding-top: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav.navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    figure {
+      margin: 1.5rem 0;
+    }
+
+    figure img {
+      border-radius: 0.5rem;
+      box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+      max-height: 450px;
+      object-fit: contain;
+    }
+
+    figure figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+    }
+
+    pre code {
+      font-size: 0.85rem;
+      white-space: pre;
+    }
+
+    .nav-step {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    .badge-step {
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV SUPERIOR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#inicio">Tutorial MiniTienda</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#instalacion">Instalación</a></li>
+          <li class="nav-item"><a class="nav-link" href="#proyecto">Proyecto Angular</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bootstrap">Bootstrap</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tienda-final">MiniTienda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#carrito">Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="#checkout">Checkout</a></li>
+          <li class="nav-item"><a class="nav-link" href="#conclusiones">Conclusiones</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CABECERA -->
+  <header id="inicio" class="hero">
+    <div class="container">
+      <h1>Tutorial: MiniTienda Gaming con Angular y Bootstrap</h1>
+      <p class="lead mt-3">
+        Guía paso a paso para crear una pequeña tienda online con carrito y
+        formulario de compra, usando Angular, Bootstrap y formularios reactivos.
+      </p>
+      <a href="#instalacion" class="btn btn-light btn-lg mt-3">
+        Empezar el tutorial
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. INSTALACIÓN -->
+    <section id="instalacion">
+      <h2 class="section-title">
+        1. Instalación de Node.js y Angular CLI
+      </h2>
+
+      <p>
+        Angular se ejecuta sobre Node.js, así que el primer paso es instalar
+        Node en el equipo. Después usaremos <code>Angular CLI</code> para crear
+        y ejecutar la aplicación.
+      </p>
+
+      <ol>
+        <li>Entrar en la web oficial de Node.js y descargar la versión LTS para Windows.</li>
+        <li>Instalar con el asistente, aceptando las opciones por defecto.</li>
+        <li>Comprobar la instalación desde PowerShell o CMD:</li>
+      </ol>
+
+      <pre><code>node -v
+npm -v</code></pre>
+
+      <figure class="text-center">
+        <img src="imagenes/nodejs.png" class="img-fluid" alt="Página oficial de Node.js" />
+        <figcaption>Figura 1. Página oficial de Node.js desde la que se descarga la versión LTS.</figcaption>
+      </figure>
+
+      <p class="mt-3">
+        A continuación instalamos Angular CLI de forma global:
+      </p>
+
+      <pre><code>npm install -g @angular/cli</code></pre>
+
+      <div class="nav-step">
+        <span></span>
+        <a href="#proyecto" class="btn btn-outline-primary btn-sm">
+          Siguiente: crear proyecto Angular →
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. PROYECTO ANGULAR -->
+    <section id="proyecto">
+      <h2 class="section-title">
+        2. Creación del proyecto <span class="badge bg-secondary badge-step">mini-tienda-angular</span>
+      </h2>
+
+      <ol>
+        <li>Abrir una terminal en la carpeta donde queramos el proyecto.</li>
+        <li>Ejecutar:</li>
+      </ol>
+
+      <pre><code>ng new mini-tienda-angular</code></pre>
+
+      <p>Opciones usadas:</p>
+      <ul>
+        <li><strong>Routing:</strong> Yes</li>
+        <li><strong>Estilos:</strong> CSS</li>
+        <li><strong>Standalone components:</strong> (por defecto en Angular actual)</li>
+      </ul>
+
+      <p>Luego entramos en la carpeta y lanzamos la aplicación:</p>
+
+      <pre><code>cd mini-tienda-angular
+ng serve --open</code></pre>
+
+      <figure class="text-center">
+        <img src="imagenes/angular-hello.png" class="img-fluid" alt="Pantalla inicial de Angular" />
+        <figcaption>Figura 2. Primera ejecución: pantalla inicial de Angular en <code>http://localhost:4200</code>.</figcaption>
+      </figure>
+
+      <p class="mt-3">
+        Abrimos después el proyecto con Visual Studio Code para trabajar
+        cómodamente con los ficheros.
+      </p>
+
+      <figure class="text-center">
+        <img src="imagenes/vscode-proyecto.png" class="img-fluid" alt="Proyecto abierto en Visual Studio Code" />
+        <figcaption>Figura 3. Proyecto <em>mini-tienda-angular</em> abierto en Visual Studio Code.</figcaption>
+      </figure>
+
+      <div class="nav-step">
+        <a href="#instalacion" class="btn btn-outline-secondary btn-sm">← Anterior: instalación</a>
+        <a href="#bootstrap" class="btn btn-outline-primary btn-sm">Siguiente: añadir Bootstrap →</a>
+      </div>
+    </section>
+
+    <!-- 3. BOOTSTRAP -->
+    <section id="bootstrap">
+      <h2 class="section-title">
+        3. Añadir Bootstrap al proyecto
+      </h2>
+
+      <p>
+        Para facilitar el diseño responsive de la interfaz usamos
+        <strong>Bootstrap 5</strong>. Primero instalamos el paquete:
+      </p>
+
+      <pre><code>npm install bootstrap</code></pre>
+
+      <p>
+        Después, en <code>angular.json</code>, añadimos la hoja de estilos de
+        Bootstrap en el array <code>"styles"</code>:
+      </p>
+
+      <pre><code>"styles": [
+  "src/styles.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
+]</code></pre>
+
+      <p class="mt-3">
+        Para comprobar que todo funciona, dejamos en
+        <code>src/app/app.html</code> un pequeño ejemplo:
+      </p>
+
+      <pre><code>&lt;div class="container mt-5"&gt;
+  &lt;h1 class="text-center text-primary"&gt;
+    🚀 Bootstrap funciona en Angular 🎉
+  &lt;/h1&gt;
+  &lt;button class="btn btn-success mt-3 d-block mx-auto"&gt;
+    Botón de prueba
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+      <figure class="text-center">
+        <img src="imagenes/bootstrap-ok.png" class="img-fluid" alt="Bootstrap funcionando dentro de Angular" />
+        <figcaption>Figura 4. Comprobación de que Bootstrap está cargado correctamente en Angular.</figcaption>
+      </figure>
+
+      <div class="nav-step">
+        <a href="#proyecto" class="btn btn-outline-secondary btn-sm">← Anterior: proyecto Angular</a>
+        <a href="#tienda-final" class="btn btn-outline-primary btn-sm">Siguiente: MiniTienda Gaming →</a>
+      </div>
+    </section>
+
+    <!-- 4. MINITIENDA FINAL -->
+    <section id="tienda-final">
+      <h2 class="section-title">
+        4. MiniTienda Gaming: productos y diseño final
+      </h2>
+
+      <p>
+        A partir de la plantilla base, se ha construido una página con:
+      </p>
+
+      <ul>
+        <li>Navbar oscura con el título <strong>MiniTienda Gaming</strong> y botón de carrito.</li>
+        <li>Cabecera (hero) con mensaje de bienvenida y botón “Ver productos”.</li>
+        <li>Sección de productos generada desde TypeScript.</li>
+        <li>Pie de página sencillo.</li>
+      </ul>
+
+      <p>
+        Los productos se definen en <code>app.ts</code> mediante una interfaz
+        <code>Producto</code> y un array con teclado, ratón y auriculares
+        gaming. Cada producto tiene nombre, precio, características e imagen
+        dentro de <code>src/assets</code>.
+      </p>
+
+      <figure class="text-center">
+        <img src="imagenes/productos-final.png" class="img-fluid" alt="Vista final de los productos gaming" />
+        <figcaption>Figura 5. Vista final de la MiniTienda con los tres productos gaming.</figcaption>
+      </figure>
+
+      <div class="nav-step">
+        <a href="#bootstrap" class="btn btn-outline-secondary btn-sm">← Anterior: Bootstrap</a>
+        <a href="#carrito" class="btn btn-outline-primary btn-sm">Siguiente: carrito de compra →</a>
+      </div>
+    </section>
+
+    <!-- 5. CARRITO -->
+    <section id="carrito">
+      <h2 class="section-title">
+        5. Carrito de compra con cantidades y total
+      </h2>
+
+      <p>
+        El carrito se modela con otra interfaz <code>CartItem</code> que
+        almacena el producto y la cantidad. En <code>app.ts</code> se implementa
+        toda la lógica:
+      </p>
+
+      <ul>
+        <li><strong>agregarAlCarrito(producto)</strong>: añade el producto o incrementa su cantidad.</li>
+        <li><strong>incrementarCantidad / decrementarCantidad</strong>: modifican la cantidad desde el modal.</li>
+        <li><strong>totalCarrito()</strong>: calcula el total de la compra.</li>
+        <li>Persistencia en <code>localStorage</code> para que el carrito se conserve al recargar.</li>
+      </ul>
+
+      <figure class="text-center">
+        <img src="imagenes/carrito-final.png" class="img-fluid" alt="Carrito con productos y botones de cantidad" />
+        <figcaption>Figura 6. Modal del carrito con cantidades, botones + y − y total actualizado.</figcaption>
+      </figure>
+
+      <p class="mt-3">
+        El modal del carrito se muestra/oculta con la variable booleana
+        <code>verCarrito</code> usando <code>*ngIf</code> y la maqueta de
+        Bootstrap (componentes <code>.modal</code>, <code>.list-group</code>,
+        etc.).
+      </p>
+
+      <div class="nav-step">
+        <a href="#tienda-final" class="btn btn-outline-secondary btn-sm">← Anterior: MiniTienda</a>
+        <a href="#checkout" class="btn btn-outline-primary btn-sm">Siguiente: formulario de compra →</a>
+      </div>
+    </section>
+
+    <!-- 6. CHECKOUT -->
+    <section id="checkout">
+      <h2 class="section-title">
+        6. Formulario de compra (checkout) con formularios reactivos
+      </h2>
+
+      <p>
+        Para simular la realización del pedido se ha creado un
+        <strong>formulario reactivo</strong> con <code>ReactiveFormsModule</code>.
+        El modal de “Finalizar pedido” se abre desde el carrito con el botón
+        <strong>Tramitar pedido</strong>.
+      </p>
+
+      <p>
+        En <code>app.ts</code> se declara un <code>FormGroup</code> con campos
+        como nombre, email, dirección, ciudad, país, método de pago y
+        aceptación de términos. Se añaden validaciones sencillas
+        (<code>required</code>, <code>email</code>, <code>minLength</code> y
+        <code>Validators.requiredTrue</code> para los términos).
+      </p>
+
+      <figure class="text-center">
+        <img src="imagenes/checkout-form.png" class="img-fluid" alt="Formulario de checkout en el modal de pedido" />
+        <figcaption>Figura 7. Modal de checkout con formulario reactivo y resumen del pedido.</figcaption>
+      </figure>
+
+      <p class="mt-3">
+        Al rellenar todos los datos y aceptar los términos, el botón
+        <strong>Confirmar pedido</strong> se habilita. El resumen del pedido
+        reutiliza los datos del carrito, mostrando cantidades y total.
+      </p>
+
+      <figure class="text-center">
+        <img src="imagenes/checkout-completo.png" class="img-fluid" alt="Formulario de checkout completado" />
+        <figcaption>Figura 8. Formulario relleno listo para confirmar la compra.</figcaption>
+      </figure>
+
+      <p class="mt-3">
+        Cuando el formulario es válido y hay productos en el carrito, el método
+        <code>confirmarPedido()</code> genera un número de pedido de la forma
+        <code>MT-{{Date.now()}}</code>, vacía el carrito, actualiza
+        <code>localStorage</code> y muestra un mensaje de éxito en el propio
+        modal.
+      </p>
+
+      <figure class="text-center">
+        <img src="imagenes/pedido-ok.png" class="img-fluid" alt="Mensaje de pedido realizado con éxito" />
+        <figcaption>Figura 9. Mensaje de confirmación con número de pedido generado.</figcaption>
+      </figure>
+
+      <div class="nav-step">
+        <a href="#carrito" class="btn btn-outline-secondary btn-sm">← Anterior: carrito</a>
+        <a href="#conclusiones" class="btn btn-outline-primary btn-sm">Siguiente: conclusiones →</a>
+      </div>
+    </section>
+
+    <!-- 7. CONCLUSIONES -->
+    <section id="conclusiones">
+      <h2 class="section-title">
+        7. Conclusiones y posibles mejoras
+      </h2>
+
+      <p>
+        A lo largo de este tutorial se ha construido una
+        <strong>MiniTienda Gaming</strong> completa que demuestra varias
+        funcionalidades clave de Angular:
+      </p>
+
+      <ul>
+        <li>Uso de <strong>componentes standalone</strong> con plantillas en ficheros separados.</li>
+        <li>Generación dinámica de contenido con <code>*ngFor</code> y <code>*ngIf</code>.</li>
+        <li>Gestión del estado del carrito en la clase del componente.</li>
+        <li>Persistencia sencilla con <code>localStorage</code>.</li>
+        <li>Formularios reactivos con validaciones y mensajes de error.</li>
+        <li>Integración visual rápida gracias a <strong>Bootstrap 5</strong>.</li>
+      </ul>
+
+      <p>
+        Como mejoras futuras se podrían añadir rutas (<code>/productos</code>,
+        <code>/checkout</code>), una API real para obtener los productos, o una
+        pasarela de pago simulada más avanzada. Aun así, el proyecto actual ya
+        es un ejemplo completo y atractivo para la actividad de la asignatura.
+      </p>
+
+      <div class="nav-step">
+        <a href="#checkout" class="btn btn-outline-secondary btn-sm">← Anterior: checkout</a>
+        <a href="#inicio" class="btn btn-outline-primary btn-sm">Volver al inicio ↑</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  ></script>
+</body>
+</html>
